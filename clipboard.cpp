@@ -40,7 +40,7 @@ SOFTWARE.
 
 int main(int argc, char** argv)
 {
-    cxxopts::Options options("clip", "A CLI tool to copy/paste to/from clipboard/files");
+    cxxopts::Options options("clipboard", "A CLI tool to copy/paste to/from clipboard/files");
 
     options.add_options()
         ("i,input", "Input file (clipboard if not specified)", cxxopts::value<std::string>())
