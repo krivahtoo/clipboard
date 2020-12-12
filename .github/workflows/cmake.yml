@@ -15,10 +15,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@master
       
     - name: Checkout submodules
-      uses: dacap/clip@5377679fd3
+      uses: textbook/git-checkout-submodule-action@master
 
     - name: Create Build Environment
       # Some projects don't allow in-source building, so create a separate build directory
