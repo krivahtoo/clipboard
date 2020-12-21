@@ -45,7 +45,6 @@ int main(int argc, char** argv)
     options.add_options()
         ("i,input", "Input file (clipboard if not specified)", cxxopts::value<std::string>())
         ("o,output", "Output file (clipboard if not specified)", cxxopts::value<std::string>())
-        ("d,debug", "Enable debugging", cxxopts::value<bool>()->default_value("false"))
         ("h,help", "Print usage")
         ("v,version", "Print version")
     ;
@@ -61,7 +60,6 @@ int main(int argc, char** argv)
       exit(0);
     }
 
-    bool debug = result["debug"].as<bool>();
     std::string input, output, data;
     if (result.count("input"))
       input = result["input"].as<std::string>();
@@ -92,10 +90,15 @@ int main(int argc, char** argv)
       data.reserve(f.tellg());
       f.seekg(0, std::ios::beg);
       data.assign(std::istreambuf_iterator<char>(f), std::istreambuf_iterator<char>());
+      if (f.fail()) {
+        std::cout << ERR_MSG << "Could not copy file contents" << std::endl;
+        exit(1);
+      }
     }
 
     if (output.empty()) {
-      if (clip::set_text(data)) {
+      std::string out = data;
+      if (clip::set_text(out)) {
         std::cout << "File copied to clipboard" << std::endl;
       } else {
         std::cout << ERR_MSG << "Could not copy to clipboard" << std::endl;
