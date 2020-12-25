@@ -48,6 +48,9 @@ int main(int argc, char** argv)
         ("h,help", "Print usage")
         ("v,version", "Print version")
     ;
+    
+    options.custom_help("[OPTIONS].. <file>");
+    options.show_positional_help();
 
     auto result = options.parse(argc, argv);
 
