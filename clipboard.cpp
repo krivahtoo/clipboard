@@ -43,14 +43,13 @@ int main(int argc, char** argv)
     cxxopts::Options options("clipboard", "A CLI tool to copy/paste to/from clipboard/files");
 
     options.add_options()
-        ("i,input", "Input file (clipboard if not specified)", cxxopts::value<std::string>())
-        ("o,output", "Output file (clipboard if not specified)", cxxopts::value<std::string>())
+        ("i,input", "Input file (clipboard if not specified)", cxxopts::value<std::string>(), "<file>")
+        ("o,output", "Output file (clipboard if not specified)", cxxopts::value<std::string>(), "<file>")
         ("h,help", "Print usage")
         ("v,version", "Print version")
     ;
     
     options.custom_help("[OPTIONS].. <file>");
-    options.show_positional_help();
 
     auto result = options.parse(argc, argv);
 
