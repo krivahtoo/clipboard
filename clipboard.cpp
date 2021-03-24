@@ -71,8 +71,13 @@ int main(int argc, char** argv)
         output = result["output"].as<std::string>();
 
       if (input.empty() && output.empty()) {
-        std::cout << ERR_MSG << "You must specify either input and output file." << std::endl;
-        exit(1);
+        if (clip::has(clip::text_format())) {
+          clip::get_text(data);
+          std::cout << data << std::endl;
+          exit(0);
+        } else {
+          exit(1);
+        }
       }
 
       if (input.empty()) {
